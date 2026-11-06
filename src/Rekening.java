@@ -1,10 +1,12 @@
 import java.util.Locale;
 
 public class Rekening {
-    // Ketentuan 1: nomor dan pemilik tetap private
     private String nomor;
     private String pemilik;
-    protected int saldo;
+    protected int saldo;  //private hanya bisa diakses di dalam class Rekening,
+                          //sedangkan protected bisa diakses oleh class turunannya,yaitu Tabungan dan Giro.
+                          //Jadi, class Giro bisa mengubah saldo secara langsung,
+                          //termasuk membuat saldo menjadi minus saat penarikan.
 
     public Rekening(String nomor, String pemilik, int saldo) {
         this.nomor = nomor;
@@ -45,6 +47,10 @@ public class Rekening {
     }
 
     protected static String formatRupiah(int angka) {
+        //Fungsi protected: Membuat method formatRupiah() bisa digunakan oleh class turunannya,
+        // seperti Giro, untuk menampilkan jumlah uang.
+        //Fungsi static: Method ini bisa dipanggil langsung menggunakan nama class Rekening,
+        // tanpa harus membuat objek terlebih dahulu. Contohnya, Rekening.formatRupiah(25000).
         return "Rp" + String.format(Locale.GERMANY, "%,d", angka);
     }
 }
